@@ -1,0 +1,202 @@
+// Bootstrap variables & mixins
+@mixin transition-transform($transition...) {
+    -webkit-transition: -webkit-transform $transition;
+    -moz-transition: -moz-transform $transition;
+    -o-transition: -o-transform $transition;
+    transition: transform $transition;
+}
+
+// Box sizing
+@mixin box-sizing($boxmodel) {
+    -webkit-box-sizing: $boxmodel;
+    -moz-box-sizing: $boxmodel;
+    box-sizing: $boxmodel;
+}
+
+// Translate
+@mixin translate($x, $y) {
+    -webkit-transform: translate($x, $y);
+    -ms-transform: translate($x, $y); // IE9+
+    transform: translate($x, $y);
+}
+
+// Box shadow
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+    box-shadow: $shadow;
+}
+
+// Opacity
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    // IE8 filter
+    $opacity-ie: ($opacity * 100);
+    filter: #{alpha(opacity=$opacity-ie)};
+}
+
+// Clearfix
+// Source: http://nicolasgallagher.com/micro-clearfix-hack/
+//
+// For modern browsers
+// 1. The space content is one way to avoid an Opera bug when the
+//    contenteditable attribute is included anywhere else in the document.
+//    Otherwise it causes space to appear at the top and bottom of elements
+//    that are clearfixed.
+// 2. The use of `table` rather than `block` is only necessary if using
+//    `:before` to contain the top-margins of child elements.
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+$screen-sm: 768px !default;
+$screen-sm-min: $screen-sm !default;
+$border-radius-base: 4px !default;
+$border-radius-large: 6px !default;
+$border-radius-small: 3px !default;
+$line-height-base: 1.428571429 !default; // 20/14
+$modal-title-line-height: $line-height-base !default;
+
+// Others
+*,
+*:before,
+*:after {
+    @include box-sizing(border-box);
+}
+
+//
+// Modals
+// --------------------------------------------------
+
+// .modal-open      - body class for killing the scroll
+// .modal           - container to scroll within
+// .modal-dialog    - positioning shell for the actual modal
+// .modal-content   - actual modal w/ bg and corners and shit
+
+// Kill the scroll on the body
+.modal-open {
+    overflow: hidden;
+}
+
+// Container that the modal scrolls within
+.modal {
+    display: none;
+    overflow: auto;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-modal-background;
+
+    // When fading in the modal, animate it to slide down
+    &.fade .modal-dialog {
+        @include translate(0, -25%);
+        @include transition-transform(0.3s ease-out);
+    }
+    &.in .modal-dialog { @include translate(0, 0)}
+}
+
+// Shell div to position the modal with bottom padding
+.modal-dialog {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    padding: 10px;
+    z-index: ($zindex-modal-background + 10);
+}
+
+// Actual modal
+.modal-content {
+    position: relative;
+    background-color: $modal-content-bg;
+    border: 1px solid $modal-content-fallback-border-color; //old browsers fallback (ie8 etc)
+    border: 1px solid $modal-content-border-color;
+    border-radius: $border-radius-large;
+    @include box-shadow(0 3px 9px rgba(0,0,0,.5));
+    background-clip: padding-box;
+    // Remove focus outline from opened modal
+    outline: none;
+}
+
+// Modal background
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: ($zindex-modal-background - 10);
+    background-color: $modal-backdrop-bg;
+    // Fade for backdrop
+    &.fade { @include opacity(0); }
+    &.in { @include opacity(.5); }
+}
+
+// Modal header
+// Top section of the modal w/ title and dismiss
+.modal-header {
+    padding: $modal-title-padding;
+    border-bottom: 1px solid $modal-header-border-color;
+    min-height: ($modal-title-padding + $modal-title-line-height);
+}
+// Close icon
+.modal-header .close {
+    margin-top: -2px;
+}
+
+// Title text within header
+.modal-title {
+    margin: 0;
+    line-height: $modal-title-line-height;
+}
+
+// Modal body
+// Where all modal content resides (sibling of .modal-header and .modal-footer)
+.modal-body {
+    position: relative;
+    padding: $modal-inner-padding;
+}
+
+// Footer (for actions)
+.modal-footer {
+    margin-top: 15px;
+    padding: ($modal-inner-padding - 1) $modal-inner-padding $modal-inner-padding;
+    text-align: right; // right align buttons
+    border-top: 1px solid $modal-footer-border-color;
+    @include clearfix(); // clear it in case folks use .pull-* classes on buttons
+
+    // Properly space out buttons
+    .btn + .btn {
+        margin-left: 5px;
+        margin-bottom: 0; // account for input[type="submit"] which gets the bottom margin like all other inputs
+    }
+    // but override that for button groups
+    .btn-group .btn + .btn {
+        margin-left: -1px;
+    }
+    // and override it for block buttons as well
+    .btn-block + .btn-block {
+        margin-left: 0;
+    }
+}
+
+// Scale up the modal
+@media screen and (min-width: $screen-sm-min) {
+    .modal-dialog {
+        width: 600px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .modal-content {
+        @include box-shadow(0 5px 15px rgba(0,0,0,.5));
+    }
+}
