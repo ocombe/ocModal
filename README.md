@@ -151,7 +151,7 @@ angular.module('app').controller('MyController', ['$scope', '$init', function($s
 
 But ```$scope.param1``` will be ```undefined```.
 
-- **closeOnEsc**: by default you will be able to close the modal with the "ESC" key. If you want to disable this behaviour, use ```closeOnEst: false```
+- **closeOnEsc**: by default you will be able to close the modal with the "ESC" key. If you want to disable this behaviour, use ```closeOnEsc: false```
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html',
