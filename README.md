@@ -17,6 +17,7 @@ An angularJS modal directive &amp; service
 - Add the module ```oc.modal``` to your application
 - Load on demand using the service or the directive :
 
+Service:
 ```javascript
 $ocModal.open('partials/modal.html');
 ```
@@ -25,6 +26,7 @@ or
 $ocModal.open('<div>My content</div>');
 ```
 
+Directive:
 ```html
 <div oc-modal-open="'partials/modal.html'"></div>
 ```
@@ -37,7 +39,7 @@ See the example in the 'example' folder to know how to integrate ocLazyLoad with
 
 ### Parameters
 You can also pass parameters when you open a modal via the service or the directive. The previous examples are equivalent to :
-
+Service:
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html'
@@ -50,6 +52,7 @@ $ocModal.open(
 });
 ```
 
+Directive:
 ```html
 <div oc-modal-open="{url: 'partials/modal.html'}"></div>
 ```
@@ -59,20 +62,20 @@ or
 ```
 
 The complete list of parameters is :
-- id: you can specify an id for your modal, it is usefull if you want to open more than one modal at the same time
+- **id**: you can specify an id for your modal, it is usefull if you want to open more than one modal at the same time
 ```javascript
 $ocModal.open(
 	id: 'modal1',
 	url: 'partials/modal.html'
 });
 ```
-By default the id is set to '_default'.
+By default the id is set to ```'_default'```.
 
-- url: a template url. OcModal uses [ng-include](http://docs.angularjs.org/api/ng.directive:ngInclude), so you can use an ng-script template or the url of an external html file
+- **url**: a template url loaded via [ng-include](http://docs.angularjs.org/api/ng.directive:ngInclude), so you can use an ng-script template or the url of an external html file
 
-- template: if you prefer to write the template in line, you can use the ```template``` parameter instead of ```url```.
+- **template**: if you prefer to write the template in line, you can use the ```template``` parameter instead of ```url```.
 
-- controller: you can pass a controller for the new content
+- **controller**: you can pass a controller for the new content
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html',
@@ -80,7 +83,7 @@ $ocModal.open(
 });
 ```
 
-- cls: You can specify one or more (space separated) classes to be added to the modal
+- **cls**: You can specify one or more (space separated) classes to be added to the modal
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html',
@@ -88,7 +91,7 @@ $ocModal.open(
 });
 ```
 
-- onOpen: you can add a callback that will be called when the modal is opened
+- **onOpen**: you can add a callback that will be called when the modal is opened
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html',
@@ -98,7 +101,7 @@ $ocModal.open(
 });
 ```
 
-- onClose: you can add a callback that will be called when the modal is closed
+- **onClose**: you can add a callback that will be called when the modal is closed
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html',
@@ -108,7 +111,7 @@ $ocModal.open(
 });
 ```
 
-- init: use this to populate the modal scope. If you use a controller you will also be able to access this via $init
+- **init**: use this to populate the modal scope. If you use a controller you will also be able to access this via $init
 ```javascript
 $ocModal.open(
 	template: '<div>{{param1}}</div>',
@@ -126,7 +129,7 @@ angular.module('app').controller('MyController', ['$scope', '$init', function($s
 }]);
 ```
 
-- isolate: by default your modal's scope will inherit the variables from the init parameter. If you don't want that and you prefer to access these variables via the $init in your controller, you can use ```isolate=true```
+- **isolate**: by default your modal's scope will inherit the variables from the init parameter. If you don't want that and you prefer to access these variables via the $init in your controller, you can use ```isolate=true```
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html',
@@ -148,14 +151,14 @@ angular.module('app').controller('MyController', ['$scope', '$init', function($s
 But $scope.param1 will be ```undefined```.
 
 ### Functions
-- open(url/template/object): use this to open the modal
+- **open(**__url/template/object__**)**: use this to open the modal
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html'
 });
 ```
 
-- close([id][, param1][, param2][, ...]): use this to close the modal
+- **close(**__[id][, param1][, param2][, ...]__**)**: use this to close the modal
 ```javascript
 $ocModal.close();
 ```
@@ -179,18 +182,18 @@ $ocModal.open(
 $ocModal.close('arg1', function() { console.log('whatever') }, {p1: 'test'});
 ```
 
-- $scope.closeModal([id][, param1][, param2][, ...]): this is an alias for $ocModal.close() that you can also use in your template
+- **$scope.closeModal(**__[id][, param1][, param2][, ...]__**)**: this is an alias for $ocModal.close() that you can also use in your template
 ```html
 <button ng-click="closeModal()"></button>
 ```
 
 ### Directives
-- oc-modal-open: this is an alias for $ocModal.open() that you can also use in your template.
+- **oc-modal-open**: this is an alias for $ocModal.open() that you can also use in your template.
 ```html
 <div oc-modal-open="{url: 'partials/modal.html'}"></div>
 ```
 
-- oc-modal-close: this is an alias for $ocModal.close() that you can also use in your template.
+- **oc-modal-close**: this is an alias for $ocModal.close() that you can also use in your template.
 ```html
 <button oc-modal-close="'Some text '+testVar"></button>
 ```
