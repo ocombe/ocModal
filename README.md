@@ -159,7 +159,7 @@ $ocModal.open(
 });
 ```
 
-### Functions
+### Functions & attributes
 - **open(**__url/template/object__**)**: use this to open the modal
 ```javascript
 $ocModal.open(
@@ -194,6 +194,21 @@ $ocModal.close('arg1', function() { console.log('whatever') }, {p1: 'test'});
 - **$scope.closeModal(**__[id][, param1][, param2][, ...]__**)**: this is an alias for ```$ocModal.close()``` that you can also use in your template
 ```html
 <button ng-click="closeModal()"></button>
+```
+
+- **getOpenedModals()**: if you need to get the ids of the opened modals
+
+- **waitingForOpen**: check this property if you need to know if another modal will be opened once this one is closed
+```javascript
+$ocModal.open({
+	url: "partials/login.html",
+	controller: 'LoginCtrl',
+	onClose: function() {
+		if(!$ocModal.waitingForOpen) {
+			$state.transitionTo('welcome');
+		}
+	}
+});
 ```
 
 ### Directives

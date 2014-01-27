@@ -25,6 +25,12 @@
 		});
 
 		var self = {
+			waitingForOpen: false,
+
+			getOpenedModals: function() {
+				return openedModals;
+			},
+
 			register: function(params) {
 				modals[params.id || '_default'] = params;
 			},
@@ -52,6 +58,14 @@
 					);
 					$modalWrapper.append($dialogsWrapper);
 					$body.append($modalWrapper);
+					var $backdrop = $dialogsWrapper.children()[0];
+					$dialogsWrapper.on('click', function(e) {
+						if(e.target === $backdrop) { // only if clicked on backdrop
+							$rootScope.$apply(function() {
+								self.closeOnEsc();
+							});
+						}
+					});
 				}
 				var modal = modals[opt.id || '_default'];
 				if(!modal) {
@@ -61,15 +75,18 @@
 					});
 					return;
 				} else if(modal && openedModals.indexOf(opt.id || '_default') !== -1) { // if modal already opened
+					self.waitingForOpen = true;
 					self.close(opt.id);
 					$timeout(function() { // let the ng-include detect that it's now empty
 						self.open(opt);
 					});
 					return;
 				}
+				self.waitingForOpen = false;
 				// ok let's open the modal
 				if(openedModals.length === 0) { // if no modal opened
 					baseOverflow = document.body.style.overflow;
+					document.body.style.overflow = 'hidden';
 					$modalWrapper.css('display', 'block');
 				} else {
 					for(var i = 0, len = openedModals.length; i < len; i++) {
@@ -112,7 +129,7 @@
 			},
 
 			closeOnEsc: function(id) {
-				if(modals[id || '_default'].params.closeOnEsc !== false) {
+				if(modals[id || openedModals[openedModals.length -1]].params.closeOnEsc !== false) {
 					self.close(id);
 				}
 			},
@@ -123,13 +140,18 @@
 					id = openedModals[openedModals.length -1];
 				}
 				var modal = modals[id || openedModals[openedModals.length -1]];
-				if(modal && modal.$scope.modalShow === true) {
+				if(modal && modal.$scope.modalShow === true) { // if the modal is opened
 					modal.$scope.modalShow = false;
+					modal.$element.remove(); // destroy the modal
 					modal.callbacksList = []; // forget all callbacks
 					openedModals.splice(openedModals.indexOf(id || openedModals[openedModals.length -1]), 1);
 					if(openedModals.length === 0) { // if no modal left opened
-						document.body.style.overflow = baseOverflow; // restore the body overflow
-						$modalWrapper.css('display', 'none');
+						$timeout(function() {
+							if(!self.waitingForOpen) { // in case the current modal is closed because another opened with the same id (avoid backdrop flickering)
+								document.body.style.overflow = baseOverflow; // restore the body overflow
+								$modalWrapper.css('display', 'none');
+							}
+						});
 					} else {
 						var topModal = modals[openedModals[openedModals.length - 1]];
 						topModal.$element.css('z-index', topModal.baseZIndex);
@@ -187,24 +209,6 @@
 						}
 						$templateWrapper.append($compile(newVal)($scope));
 						$scope.$emit('$includeContentLoaded');
-					}
-				});
-
-				$scope.$watch('modalShow', function(show) {
-					if(typeof show !== 'undefined') {
-						if(show) {
-							document.body.style.overflow = 'hidden';
-							dialog.on('click.modal', function(e) {
-								if(e.target === dialog[0]) { // évite les clicks sur les children
-									$scope.$apply(function() {
-										$ocModal.closeOnEsc(id);
-									});
-								}
-							});
-						} else {
-							$element.remove(); // remove the current view
-							dialog.off('click.modal');
-						}
 					}
 				});
 			}
