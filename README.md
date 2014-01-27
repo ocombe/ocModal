@@ -17,7 +17,7 @@ An angularJS modal directive &amp; service
 - Add the module ```oc.modal``` to your application
 - Load on demand using the service or the directive :
 
-Service:
+**Service**:
 ```javascript
 $ocModal.open('partials/modal.html');
 ```
@@ -26,7 +26,7 @@ or
 $ocModal.open('<div>My content</div>');
 ```
 
-Directive:
+**Directive**:
 ```html
 <div oc-modal-open="'partials/modal.html'"></div>
 ```
@@ -39,7 +39,8 @@ See the example in the 'example' folder to know how to integrate ocLazyLoad with
 
 ### Parameters
 You can also pass parameters when you open a modal via the service or the directive. The previous examples are equivalent to :
-Service:
+
+**Service**:
 ```javascript
 $ocModal.open(
 	url: 'partials/modal.html'
@@ -52,7 +53,7 @@ $ocModal.open(
 });
 ```
 
-Directive:
+**Directive**:
 ```html
 <div oc-modal-open="{url: 'partials/modal.html'}"></div>
 ```
@@ -148,7 +149,7 @@ angular.module('app').controller('MyController', ['$scope', '$init', function($s
 }]);
 ```
 
-But $scope.param1 will be ```undefined```.
+But ```$scope.param1``` will be ```undefined```.
 
 ### Functions
 - **open(**__url/template/object__**)**: use this to open the modal
@@ -182,18 +183,18 @@ $ocModal.open(
 $ocModal.close('arg1', function() { console.log('whatever') }, {p1: 'test'});
 ```
 
-- **$scope.closeModal(**__[id][, param1][, param2][, ...]__**)**: this is an alias for $ocModal.close() that you can also use in your template
+- **$scope.closeModal(**__[id][, param1][, param2][, ...]__**)**: this is an alias for ```$ocModal.close()``` that you can also use in your template
 ```html
 <button ng-click="closeModal()"></button>
 ```
 
 ### Directives
-- **oc-modal-open**: this is an alias for $ocModal.open() that you can also use in your template.
+- **oc-modal-open**: this is an alias for ```$ocModal.open()``` that you can also use in your template.
 ```html
 <div oc-modal-open="{url: 'partials/modal.html'}"></div>
 ```
 
-- **oc-modal-close**: this is an alias for $ocModal.close() that you can also use in your template.
+- **oc-modal-close**: this is an alias for ```$ocModal.close()``` that you can also use in your template.
 ```html
 <button oc-modal-close="'Some text '+testVar"></button>
 ```
