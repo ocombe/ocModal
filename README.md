@@ -42,13 +42,13 @@ You can also pass parameters when you open a modal via the service or the direct
 
 **Service**:
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html'
 });
 ```
 or
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	template: '<div>My content</div>'
 });
 ```
@@ -65,7 +65,7 @@ or
 The complete list of parameters is :
 - **id**: you can specify an id for your modal, it is usefull if you want to open more than one modal at the same time
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	id: 'modal1',
 	url: 'partials/modal.html'
 });
@@ -78,7 +78,7 @@ By default the id is set to ```'_default'```.
 
 - **controller**: you can pass a controller for the new content
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html',
 	controller: 'MyController'
 });
@@ -86,7 +86,7 @@ $ocModal.open(
 
 - **cls**: You can specify one or more (space separated) classes to be added to the modal
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html',
 	cls: 'my-class1 my-class2'
 });
@@ -94,7 +94,7 @@ $ocModal.open(
 
 - **onOpen**: you can add a callback that will be called when the modal is opened
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html',
 	onOpen: function() {
 		console.log('Just opened !');
@@ -104,7 +104,7 @@ $ocModal.open(
 
 - **onClose**: you can add a callback that will be called when the modal is closed
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html',
 	onClose: function() {
 		console.log('Just closed !');
@@ -114,7 +114,7 @@ $ocModal.open(
 
 - **init**: use this to populate the modal scope. If you use a controller you will also be able to access this via $init
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	template: '<div>{{param1}}</div>',
 	controller: 'MyController',
 	init: {
@@ -132,7 +132,7 @@ angular.module('app').controller('MyController', ['$scope', '$init', function($s
 
 - **isolate**: by default your modal's scope will inherit the variables from the init parameter. If you don't want that and you prefer to access these variables via the $init in your controller, you can use ```isolate=true```
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html',
 	controller: 'MyController',
 	isolate: true,
@@ -153,7 +153,7 @@ But ```$scope.param1``` will be ```undefined```.
 
 - **closeOnEsc**: by default you will be able to close the modal with the "ESC" key. If you want to disable this behaviour, use ```closeOnEsc: false```
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html',
 	closeOnEsc: false
 });
@@ -162,7 +162,7 @@ $ocModal.open(
 ### Functions & attributes
 - **open(**__url/template/object__**)**: use this to open the modal
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html'
 });
 ```
@@ -179,7 +179,7 @@ $ocModal.close('modal1');
 
 You can also pass what you want to the onClose callback (if you have one) :
 ```javascript
-$ocModal.open(
+$ocModal.open({
 	url: 'partials/modal.html',
 	onClose: function(a, b, c) {
 		console.log(a); // arg1
