@@ -59,12 +59,13 @@
 					$modalWrapper.append($dialogsWrapper);
 					$body.append($modalWrapper);
 					var $backdrop = $dialogsWrapper.children()[0];
-					$dialogsWrapper.on('click', function(e) {
+					$dialogsWrapper.on('click.modal', function(e) {
 						if(e.target === $backdrop) { // only if clicked on backdrop
 							$rootScope.$apply(function() {
 								self.closeOnEsc();
 							});
 						}
+						e.stopPropagation();
 					});
 				}
 				var modal = modals[opt.id || '_default'];
@@ -134,9 +135,14 @@
 				}
 			},
 
-			close: function(id, args) {
-				if((typeof args === 'undefined' && typeof id !== 'string') || (openedModals.indexOf(id) === -1)) {
+			close: function(id) {
+				var args;
+				if(typeof id === 'string' && openedModals.indexOf(id) !== -1) {
+					args = Array.prototype.slice.call(arguments, 1);
+				} else {
 					args = arguments;
+				}
+				if(typeof id === 'undefined' || openedModals.indexOf(id) === -1) {
 					id = openedModals[openedModals.length -1];
 				}
 				var modal = modals[id || openedModals[openedModals.length -1]];
@@ -181,7 +187,7 @@
 				'<div class="modal-dialog {{customClass}}" ng-show="modalShow">' +
 					'<div class="modal-content" ng-if="modalTemplate"></div>' +
 					'<div class="modal-content" ng-include="modalUrl"></div>' +
-					'</div>',
+				'</div>',
 
 			link: function link($scope, $element, $attrs) {
 				var dialog = $element.find('[role=dialog]'),
@@ -189,7 +195,9 @@
 					$templateWrapper;
 
 				$scope.closeModal = function() {
-					$ocModal.close(id, arguments);
+					var args = Array.prototype.slice.call(arguments);
+					args.unshift(id);
+					$ocModal.close.apply(undefined, args);
 				};
 
 				$ocModal.register({
