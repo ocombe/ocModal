@@ -172,12 +172,6 @@
 		return self;
 	}]);
 
-	/**
-	 * @ngdoc directive
-	 * @name openOox.directive:modal
-	 * @description
-	 * Directive permettant de créer une modal qui s'enregistre dans le service $modal
-	 */
 	ocModal.directive('ocModal', ['$ocModal', '$compile', '$timeout', function($ocModal, $compile, $timeout) {
 		return {
 			restrict: 'AE',
