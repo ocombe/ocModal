@@ -28,7 +28,7 @@
         text-align: left; /* on rétablit l'alignement du texte */
 
         .modal-content {
-            @include border-radius($modal-border-radius);
+            border-radius: $modal-border-radius;
         }
     }
     .modal-dialog, &.fade .modal-dialog, &.fade.in .modal-dialog {
