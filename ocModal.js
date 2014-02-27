@@ -83,19 +83,21 @@
 					});
 					return;
 				}
-				self.waitingForOpen = false;
 				// ok let's open the modal
-				if(openedModals.length === 0) { // if no modal opened
-					baseOverflow = document.body.style.overflow;
-					document.body.style.overflow = 'hidden';
-					$modalWrapper.css('display', 'block');
-				} else {
-					for(var i = 0, len = openedModals.length; i < len; i++) {
-						var $e = modals[openedModals[i]].$element;
-						modals[openedModals[i]].baseZIndex = $e.css('z-index');
-						$e.css('z-index', '-1');
+				if(!self.waitingForOpen) {
+					if(openedModals.length === 0) { // if no modal opened
+						baseOverflow = document.body.style.overflow;
+						document.body.style.overflow = 'hidden';
+						$modalWrapper.css('display', 'block');
+					} else {
+						for(var i = 0, len = openedModals.length; i < len; i++) {
+							var $e = modals[openedModals[i]].$element;
+							modals[openedModals[i]].baseZIndex = $e.css('z-index');
+							$e.css('z-index', '-1');
+						}
 					}
 				}
+				self.waitingForOpen = false;
 				openedModals.push(opt.id || '_default');
 				modal.params = opt;
 				modal.$scope.modalShow = true;
@@ -153,7 +155,7 @@
 					openedModals.splice(openedModals.indexOf(id || openedModals[openedModals.length -1]), 1);
 					if(openedModals.length === 0) { // if no modal left opened
 						$timeout(function() {
-							if(!self.waitingForOpen) { // in case the current modal is closed because another opened with the same id (avoid backdrop flickering)
+							if(!self.waitingForOpen) { // in case the current modal is closed because another opened with the same id (avoid backdrop flickering in firefox)
 								document.body.style.overflow = baseOverflow; // restore the body overflow
 								$modalWrapper.css('display', 'none');
 							}
