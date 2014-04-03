@@ -130,6 +130,13 @@ angular.module('app').controller('MyController', ['$scope', '$init', function($s
 }]);
 ```
 
+- **$ocModalParams**: Access the modal params in your controller
+```javascript
+angular.module('app').controller('MyController', ['$scope', '$ocModalParams', function($scope, $ocModalParams) {
+	console.log($ocModalParams);
+}]);
+```
+
 - **isolate**: by default your modal's scope will inherit the variables from the init parameter. If you don't want that and you prefer to access these variables via the $init in your controller, you can use ```isolate=true```
 ```javascript
 $ocModal.open({

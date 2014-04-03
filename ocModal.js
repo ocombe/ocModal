@@ -112,7 +112,7 @@
 						angular.extend(event.targetScope, modal.params.init, true);
 					}
 					if(typeof modal.params.controller === 'string') {
-						$controller(modal.params.controller, {$scope: event.targetScope, $init: modal.params.init}); // inject controller
+						$controller(modal.params.controller, {$scope: event.targetScope, $init: modal.params.init, $ocModalParams: modal.params}); // inject controller
 					}
 					off();
 				});
