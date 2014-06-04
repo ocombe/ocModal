@@ -1,5 +1,12 @@
 /**
  * ocModal - An angularJS modal directive / service
+ * @version v0.1.0
+ * @link https://github.com/ocombe/ocModal
+ * @license MIT
+ * @author Olivier Combe <olivier.combe@gmail.com>
+ */
+/**
+ * ocModal - An angularJS modal directive / service
  * @version v0.0.6
  * @link https://github.com/ocombe/ocModal
  * @license MIT
@@ -218,7 +225,7 @@
 				}
 				var modal = modals[id || openedModals[openedModals.length -1]];
 				if(modal && modal.$scope.modalShow === true) { // if the modal is opened
-					var animDuration = getAnimDuration(modal.$element.children().first());
+					var animDuration = getAnimDuration(angular.element(modal.$element[0].querySelector('.modal-content')));
 					$timeout(function() {
 						modal.$scope.modalShow = false;
 

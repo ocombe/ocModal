@@ -1,6 +1,6 @@
 {
   "name": "ocModal",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "An angularJS modal directive / service",
   "author": "Olivier Combe <olivier.combe@gmail.com>",
   "license": "MIT",
@@ -18,13 +18,7 @@
     "type": "git",
     "url": "git://github.com/ocombe/ocModal.git"
   },
-  "keywords": [
-    "modal",
-    "dialog",
-    "module",
-    "angular",
-    "angularJS"
-  ],
+  "keywords": ["modal", "dialog", "module", "angular", "angularJS"],
   "devDependencies": {
     "bower": "~1.3.4",
     "gulp": "~3.7.0",

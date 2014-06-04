@@ -99,7 +99,7 @@ var makeChangelog = function(newVer) {
 		concat = require('gulp-concat'),
 		clean = require('gulp-clean');
 
-	stream.queue(gulp.src('').pipe(exec('node ./changelog.js ' + newVer, { pipeStdout: true })));
+	stream.queue(gulp.src('').pipe(exec('node ./src/changelog.js ' + newVer, { pipeStdout: true })));
 	stream.queue(gulp.src('CHANGELOG.md').pipe(clean()));
 
 	return stream.done()
