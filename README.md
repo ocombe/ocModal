@@ -241,7 +241,7 @@ You can use a set of animations by including the file ocModal.animations.css and
 - slit
 
 ```javascript
-oc-modal-open="{url: 'partials/modal.html', cls: 'fade-in'}
+oc-modal-open="{url: 'partials/modal.html', cls: 'fade-in'}"
 ```
 
 You can add your own animations by adding new styles to `.modal .modal-dialog .modal-content` and `.modal .modal-dialog .modal-content.opened`.
