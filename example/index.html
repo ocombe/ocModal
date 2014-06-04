@@ -7,7 +7,18 @@
     </head>
 
     <body ng-controller="AppCtrl">
-        <button class="btn btn-primary" oc-modal-open="'partials/modal.html'">Test open</button>
+        <h3>Default</h3>
+        <p><button class="btn btn-primary" oc-modal-open="'partials/modal.html'">Test open</button></p>
+
+        <h3>Transitions :</h3>
+        <p><button class="btn btn-primary" oc-modal-open="{url: 'partials/modal.html', cls: 'fade-in'}">fade</button></p>
+        <p><button class="btn btn-primary" oc-modal-open="{url: 'partials/modal.html', cls: 'slide-down'}">slide-down</button></p>
+        <p><button class="btn btn-primary" oc-modal-open="{url: 'partials/modal.html', cls: 'scale'}">scale</button></p>
+        <p><button class="btn btn-primary" oc-modal-open="{url: 'partials/modal.html', cls: 'fall'}">fall</button></p>
+        <p><button class="btn btn-primary" oc-modal-open="{url: 'partials/modal.html', cls: 'flip-horizontal'}">flip horizontal</button></p>
+        <p><button class="btn btn-primary" oc-modal-open="{url: 'partials/modal.html', cls: 'flip-vertical'}">flip vertical</button></p>
+        <p><button class="btn btn-primary" oc-modal-open="{url: 'partials/modal.html', cls: 'super-scaled'}">super-scaled</button></p>
+        <p><button class="btn btn-primary" oc-modal-open="{url: 'partials/modal.html', cls: 'slit'}">slit</button></p>
 
         <script type="text/ng-template" id="partials/modal.html">
             <div class="modal-header">

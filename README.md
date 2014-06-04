@@ -13,7 +13,7 @@ An angularJS modal directive &amp; service
 
 ### Usage
 - Put ocModal.js into you project
-- Add the css file to your project: if you don't have bootstrap 3, include css/full.min.css. If you already have bootstrap 3, use default.min.css
+- Add the css file to your project: if you don't have bootstrap 3, include dist/css/ocModal.full.min.css. If you already have bootstrap 3, use dist/css/ocModal.light.min.css
 - Add the module ```oc.modal``` to your application
 - Load on demand using the service or the directive :
 
@@ -228,3 +228,20 @@ $ocModal.open({
 ```html
 <button oc-modal-close="'Some text '+testVar"></button>
 ```
+
+### Animations
+You can use a set of animations by including the file ocModal.animations.css and by adding one of those classes with the cls parameter :
+- fade
+- slide-down
+- scale
+- fall
+- flip-horizontal
+- flip-vertical
+- super-scaled
+- slit
+
+```javascript
+oc-modal-open="{url: 'partials/modal.html', cls: 'fade-in'}
+```
+
+You can add your own animations by adding new styles to `.modal .modal-dialog .modal-content` and `.modal .modal-dialog .modal-content.opened`.
