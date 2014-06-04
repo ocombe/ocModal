@@ -218,7 +218,7 @@
 				}
 				var modal = modals[id || openedModals[openedModals.length -1]];
 				if(modal && modal.$scope.modalShow === true) { // if the modal is opened
-					var animDuration = getAnimDuration(angular.element(modal.$element[0].querySelector('.modal-content')));
+					var animDuration = getAnimDuration(modal.$element.children().first());
 					$timeout(function() {
 						modal.$scope.modalShow = false;
 

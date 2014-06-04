@@ -1,3 +1,10 @@
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    // IE8 filter
+    $opacity-ie: ($opacity * 100);
+    filter: #{alpha(opacity=$opacity-ie)};
+}
+
 .noOverflow {
     overflow: hidden;
 }
@@ -6,7 +13,7 @@
     z-index: $zindex-modal;
     position: relative;
 
-    .modal-backdrop.in {
+    .modal-backdrop {
         @include opacity($modal-backdrop-opacity);
     }
 }
@@ -27,17 +34,18 @@
         left: 50%;
         top: 50%;
         text-align: left; /* on rétablit l'alignement du texte */
+        @include perspective(1300px);
 
         .modal-content {
             border-radius: $modal-border-radius;
         }
     }
-    .modal-dialog, &.fade .modal-dialog, &.fade.in .modal-dialog {
+    .modal-dialog {
         @include transform(translate(-50%, -50%));
     }
 }
 .no-csstransforms {
-    .modal-dialog, &.fade .modal-dialog, &.fade.in .modal-dialog {
+    .modal-dialog {
         position: relative;
         left: auto;
         top: auto;

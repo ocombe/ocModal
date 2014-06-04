@@ -1,6 +1,6 @@
 {
   "name": "ocModal",
-  "main": "ocModal.min.js",
+  "main": "dist/ocModal.min.js",
   "version": "0.0.6",
   "homepage": "https://github.com/ocombe/ocModal",
   "authors": [
@@ -18,6 +18,9 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components"
+    "bower_components",
+    "src",
+    "gulpfile.js",
+    "package.json"
   ]
 }

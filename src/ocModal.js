@@ -1,19 +1,99 @@
 /**
- * copyright: Olivier Combe (https://github.com/ocombe/ocModal)
+ * ocModal - An angularJS modal directive / service
+ * @version v0.0.6
+ * @link https://github.com/ocombe/ocModal
+ * @license MIT
+ * @author Olivier Combe <olivier.combe@gmail.com>
  */
-
+/**
+ * ocModal - An angularJS modal directive / service
+ * @version v0.0.6
+ * @link https://github.com/ocombe/ocModal
+ * @license MIT
+ * @author Olivier Combe <olivier.combe@gmail.com>
+ */
 (function() {
 	'use strict';
 
 	var ocModal = angular.module('oc.modal', []);
 
-	ocModal.factory('$ocModal', ['$rootScope', '$controller', '$location', '$timeout', '$compile', function($rootScope, $controller, $location, $timeout, $compile) {
+	ocModal.factory('$ocModal', ['$rootScope', '$controller', '$location', '$timeout', '$compile', '$sniffer', function($rootScope, $controller, $location, $timeout, $compile, $sniffer) {
 		var $body = angular.element(document.body),
-			$modalWrapper,
-			$dialogsWrapper,
+			$dialogsWrapper = angular.element('<div role="dialog" tabindex="-1" class="modal"><div class="modal-backdrop"></div></div>'),
+			$modalWrapper = angular.element(
+				'<div class="modal-wrapper"></div>'
+			),
 			modals = {},
 			openedModals = [],
 			baseOverflow;
+
+		// include the modal in DOM at start for animations
+		$modalWrapper.css('display', 'none');
+		$modalWrapper.append($dialogsWrapper);
+		$body.append($modalWrapper);
+		var $backdrop = $dialogsWrapper.children()[0];
+		$dialogsWrapper.on('click.modal', function(e) {
+			if(e.target === $backdrop) { // only if clicked on backdrop
+				$rootScope.$apply(function() {
+					self.closeOnEsc();
+				});
+			}
+			e.stopPropagation();
+		});
+
+		var parseMaxTime = function parseMaxTime(str) {
+			var total = 0, values = angular.isString(str) ? str.split(/\s*,\s*/) : [];
+			angular.forEach(values, function(value) {
+				total = Math.max(parseFloat(value) || 0, total);
+			});
+			return total;
+		}
+
+		var getAnimDuration = function getDuration($element) {
+			var duration = 0;
+			if(($sniffer.transitions || $sniffer.animations)) {
+				//one day all browsers will have these properties
+				var w3cAnimationProp = 'animation';
+				var w3cTransitionProp = 'transition';
+
+				//but some still use vendor-prefixed styles
+				var vendorAnimationProp = $sniffer.vendorPrefix + 'Animation';
+				var vendorTransitionProp = $sniffer.vendorPrefix + 'Transition';
+
+				var durationKey = 'Duration',
+					delayKey = 'Delay',
+					animationIterationCountKey = 'IterationCount';
+
+				//we want all the styles defined before and after
+				var ELEMENT_NODE = 1;
+				angular.forEach($element, function(element) {
+					if(element.nodeType == ELEMENT_NODE) {
+						var elementStyles = window.getComputedStyle(element) || {};
+
+						var transitionDelay = Math.max(parseMaxTime(elementStyles[w3cTransitionProp + delayKey]),
+							parseMaxTime(elementStyles[vendorTransitionProp + delayKey]));
+
+						var animationDelay = Math.max(parseMaxTime(elementStyles[w3cAnimationProp + delayKey]),
+							parseMaxTime(elementStyles[vendorAnimationProp + delayKey]));
+
+						var transitionDuration = Math.max(parseMaxTime(elementStyles[w3cTransitionProp + durationKey]),
+							parseMaxTime(elementStyles[vendorTransitionProp + durationKey]));
+
+						var animationDuration = Math.max(parseMaxTime(elementStyles[w3cAnimationProp + durationKey]),
+							parseMaxTime(elementStyles[vendorAnimationProp + durationKey]));
+
+						if(animationDuration > 0) {
+							animationDuration *= Math.max(parseInt(elementStyles[w3cAnimationProp + animationIterationCountKey]) || 0,
+								parseInt(elementStyles[vendorAnimationProp + animationIterationCountKey]) || 0, 1);
+						}
+
+						duration = Math.max(animationDelay + animationDuration, transitionDelay + transitionDuration, duration);
+					}
+				});
+			}
+
+			return duration * 1000;
+		}
 
 		angular.element(document).on('keyup', function(e) {
 			if (e.keyCode == 27 && openedModals.length > 0) {
@@ -51,23 +131,6 @@
 						}
 					}
 				}
-				if(typeof $modalWrapper === 'undefined') {
-					$dialogsWrapper = angular.element('<div role="dialog" tabindex="-1" class="modal fade in"><div class="modal-backdrop fade in"></div></div>');
-					$modalWrapper = angular.element(
-						'<div class="modal-wrapper fade-in"></div>'
-					);
-					$modalWrapper.append($dialogsWrapper);
-					$body.append($modalWrapper);
-					var $backdrop = $dialogsWrapper.children()[0];
-					$dialogsWrapper.on('click.modal', function(e) {
-						if(e.target === $backdrop) { // only if clicked on backdrop
-							$rootScope.$apply(function() {
-								self.closeOnEsc();
-							});
-						}
-						e.stopPropagation();
-					});
-				}
 				var modal = modals[opt.id || '_default'];
 				if(!modal) {
 					$dialogsWrapper.append($compile('<div oc-modal="'+(opt.id ? opt.id : '_default')+'"></div>')($rootScope));
@@ -100,8 +163,14 @@
 				self.waitingForOpen = false;
 				openedModals.push(opt.id || '_default');
 				modal.params = opt;
-				modal.$scope.modalShow = true;
 				modal.$scope.customClass = modal.params.cls;
+
+				// timeout for animations (if any)
+				$rootScope.$digest();
+				$body[0].offsetWidth; // force paint to be sure the element is in the page
+				$timeout(function() {
+					modal.$scope.modalShow = true;
+				}, 100);
 
 				if(typeof modal.params.onOpen === 'function') {
 					modal.params.onOpen();
@@ -149,8 +218,15 @@
 				}
 				var modal = modals[id || openedModals[openedModals.length -1]];
 				if(modal && modal.$scope.modalShow === true) { // if the modal is opened
-					modal.$scope.modalShow = false;
-					modal.$element.remove(); // destroy the modal
+					var animDuration = getAnimDuration(angular.element(modal.$element[0].querySelector('.modal-content')));
+					$timeout(function() {
+						modal.$scope.modalShow = false;
+
+						$timeout(function() {
+							modal.$element.remove(); // destroy the modal
+						}, animDuration);
+					});
+
 					modal.callbacksList = []; // forget all callbacks
 					openedModals.splice(openedModals.indexOf(id || openedModals[openedModals.length -1]), 1);
 					if(openedModals.length === 0) { // if no modal left opened
@@ -159,7 +235,7 @@
 								document.body.style.overflow = baseOverflow; // restore the body overflow
 								$modalWrapper.css('display', 'none');
 							}
-						});
+						}, animDuration);
 					} else {
 						var topModal = modals[openedModals[openedModals.length - 1]];
 						topModal.$element.css('z-index', topModal.baseZIndex);
@@ -180,10 +256,10 @@
 			replace: true,
 			scope: true,
 			template:
-				'<div class="modal-dialog {{customClass}}" ng-show="modalShow">' +
-					'<div class="modal-content" ng-if="modalTemplate"></div>' +
-					'<div class="modal-content" ng-include="modalUrl"></div>' +
-				'</div>',
+			'<div class="modal-dialog">' +
+			'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-if="modalTemplate"></div>' +
+			'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-include="modalUrl"></div>' +
+			'</div>',
 
 			link: function link($scope, $element, $attrs) {
 				var dialog = $element.find('[role=dialog]'),
