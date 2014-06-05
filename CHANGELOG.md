@@ -1,3 +1,13 @@
+<a name="0.1.1"></a>
+# 0.1.1 (2014-06-05)
+
+
+## Bug Fixes
+
+- style updates to center modal
+ ([bc3446cd](https://github.com/ocombe/angular-localForage/commit/bc3446cdac3e9f1bf32705814a189b6755b42da2))
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2014-06-04)
 
