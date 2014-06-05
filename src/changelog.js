@@ -9,8 +9,8 @@ var GIT_LOG_CMD = 'git log --grep="%s" -E --format=%s %s..HEAD';
 var GIT_TAG_CMD = 'git describe --tags --abbrev=0';
 
 var HEADER_TPL = '<a name="%s"></a>\n# %s (%s)\n\n';
-var LINK_ISSUE = '[#%s](https://github.com/ocombe/angular-localForage/issues/%s)';
-var LINK_COMMIT = '[%s](https://github.com/ocombe/angular-localForage/commit/%s)';
+var LINK_ISSUE = '[#%s](https://github.com/ocombe/ocModal/issues/%s)';
+var LINK_COMMIT = '[%s](https://github.com/ocombe/ocModal/commit/%s)';
 
 var EMPTY_COMPONENT = '$$';
 
