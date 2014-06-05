@@ -25,11 +25,7 @@
 
     .modal-dialog {
         z-index: $zindex-modal + 10;
-        padding: 10px 10px 0 10px;
-        max-height: 100%;
-        width: 600px;
-        max-width: 100%;
-        margin: 0;
+        width: auto;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -38,6 +34,11 @@
 
         .modal-content {
             border-radius: $modal-border-radius;
+            width: 600px;
+            padding: 10px 10px 0 10px;
+            max-width: 100%;
+            max-height: 100%;
+            margin: 0;
         }
     }
     .modal-dialog {

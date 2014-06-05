@@ -10,7 +10,7 @@
     "url": "https://github.com/ocombe/ocModal/issues"
   },
   "scripts": {
-    "start": "static ./example/",
+    "start": "static ./example/ -p 3000",
     "install": "bower install",
     "build": "gulp build"
   },
