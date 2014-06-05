@@ -1,23 +1,9 @@
-/**
- * ocModal - An angularJS modal directive / service
- * @version v0.0.6
- * @link https://github.com/ocombe/ocModal
- * @license MIT
- * @author Olivier Combe <olivier.combe@gmail.com>
- */
-/**
- * ocModal - An angularJS modal directive / service
- * @version v0.0.6
- * @link https://github.com/ocombe/ocModal
- * @license MIT
- * @author Olivier Combe <olivier.combe@gmail.com>
- */
 (function() {
 	'use strict';
 
 	var ocModal = angular.module('oc.modal', []);
 
-	ocModal.factory('$ocModal', ['$rootScope', '$controller', '$location', '$timeout', '$compile', '$sniffer', function($rootScope, $controller, $location, $timeout, $compile, $sniffer) {
+	ocModal.factory('$ocModal', ['$rootScope', '$controller', '$location', '$timeout', '$compile', '$sniffer', '$q', function($rootScope, $controller, $location, $timeout, $compile, $sniffer, $q) {
 		var $body = angular.element(document.body),
 			$dialogsWrapper = angular.element('<div role="dialog" tabindex="-1" class="modal"><div class="modal-backdrop"></div></div>'),
 			$modalWrapper = angular.element(
@@ -139,11 +125,13 @@
 					});
 					return;
 				} else if(modal && openedModals.indexOf(opt.id || '_default') !== -1) { // if modal already opened
+					if(self.waitingForOpen) {
+						return;
+					}
 					self.waitingForOpen = true;
-					self.close(opt.id);
-					$timeout(function() { // let the ng-include detect that it's now empty
+					self.close(opt.id).then(function() {
 						self.open(opt);
-					});
+					})
 					return;
 				}
 				// ok let's open the modal
@@ -202,12 +190,13 @@
 
 			closeOnEsc: function(id) {
 				if(modals[id || openedModals[openedModals.length -1]].params.closeOnEsc !== false) {
-					self.close(id);
+					return self.close(id);
 				}
 			},
 
 			close: function(id) {
-				var args;
+				var args,
+					deferred = $q.defer();
 				if(typeof id === 'string' && openedModals.indexOf(id) !== -1) {
 					args = Array.prototype.slice.call(arguments, 1);
 				} else {
@@ -224,26 +213,31 @@
 
 						$timeout(function() {
 							modal.$element.remove(); // destroy the modal
-						}, animDuration);
-					});
 
-					modal.callbacksList = []; // forget all callbacks
-					openedModals.splice(openedModals.indexOf(id || openedModals[openedModals.length -1]), 1);
-					if(openedModals.length === 0) { // if no modal left opened
-						$timeout(function() {
-							if(!self.waitingForOpen) { // in case the current modal is closed because another opened with the same id (avoid backdrop flickering in firefox)
-								document.body.style.overflow = baseOverflow; // restore the body overflow
-								$modalWrapper.css('display', 'none');
+							modal.callbacksList = []; // forget all callbacks
+							openedModals.splice(openedModals.indexOf(id || openedModals[openedModals.length -1]), 1);
+							if(openedModals.length === 0) { // if no modal left opened
+								if(!self.waitingForOpen) { // in case the current modal is closed because another opened with the same id (avoid backdrop flickering in firefox)
+									document.body.style.overflow = baseOverflow; // restore the body overflow
+									$modalWrapper.css('display', 'none');
+								}
+							} else {
+								var topModal = modals[openedModals[openedModals.length - 1]];
+								topModal.$element.css('z-index', topModal.baseZIndex);
 							}
+							if(typeof modal.params.onClose === 'function') {
+								modal.params.onClose.apply(undefined, args);
+							}
+
+							deferred.resolve();
 						}, animDuration);
-					} else {
-						var topModal = modals[openedModals[openedModals.length - 1]];
-						topModal.$element.css('z-index', topModal.baseZIndex);
-					}
-					if(typeof modal.params.onClose === 'function') {
-						modal.params.onClose.apply(undefined, args);
-					}
+
+
+					});
+				} else {
+					deferred.resolve();
 				}
+				return deferred.promise;
 			}
 		};
 
@@ -257,13 +251,12 @@
 			scope: true,
 			template:
 			'<div class="modal-dialog">' +
-			'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-if="modalTemplate"></div>' +
-			'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-include="modalUrl"></div>' +
+				'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-if="modalTemplate"></div>' +
+				'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-include="modalUrl"></div>' +
 			'</div>',
 
 			link: function link($scope, $element, $attrs) {
-				var dialog = $element.find('[role=dialog]'),
-					id = $attrs.ocModal,
+				var id = $attrs.ocModal,
 					$templateWrapper;
 
 				$scope.closeModal = function() {

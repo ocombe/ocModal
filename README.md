@@ -174,7 +174,7 @@ $ocModal.open({
 });
 ```
 
-- **close(**__[id][, param1][, param2][, ...]__**)**: use this to close the modal
+- **close(**__[id][, param1][, param2][, ...]__**)**: use this to close the modal, it will return a promise that resolves at the end of the closing animation (if any)
 ```javascript
 $ocModal.close();
 ```
