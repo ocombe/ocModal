@@ -1,6 +1,6 @@
 {
   "name": "ocModal",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An angularJS modal directive / service",
   "author": "Olivier Combe <olivier.combe@gmail.com>",
   "license": "MIT",

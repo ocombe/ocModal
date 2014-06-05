@@ -1,3 +1,13 @@
+<a name="0.1.2"></a>
+# 0.1.2 (2014-06-05)
+
+
+## Bug Fixes
+
+- the close function now returns a promise and resolves after animations
+ ([3dde4592](https://github.com/ocombe/angular-localForage/commit/3dde4592bace1b836b2aa4dde8e3ee9a201e31f0))
+
+
 <a name="0.1.1"></a>
 # 0.1.1 (2014-06-05)
 
