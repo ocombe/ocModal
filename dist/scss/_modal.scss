@@ -31,6 +31,10 @@
         top: 50%;
         text-align: left; /* on rétablit l'alignement du texte */
         @include perspective(1300px);
+        max-width: 100%;
+        max-height: 100%;
+        margin: 0;
+        padding: 10px;
 
         .modal-content {
             border-radius: $modal-border-radius;

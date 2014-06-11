@@ -22,7 +22,11 @@
     /* on rétablit l'alignement du texte */
     -webkit-perspective: 1300px;
     -moz-perspective: 1300px;
-    perspective: 1300px; }
+    perspective: 1300px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 10px; }
     .modal .modal-dialog .modal-content {
       border-radius: 2px;
       width: 600px;

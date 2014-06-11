@@ -6,6 +6,8 @@
 
 - anim name for fade is fade-in not fade
  ([2dc9b931](https://github.com/ocombe/ocModal/commit/2dc9b93119356bad0f19b037e7ec9233fd505c5a))
+- let the modal be responsive on small resolutions
+ ([02cff9f5](https://github.com/ocombe/ocModal/commit/02cff9f54d94aecb165f8a469847bd7e759dc57a))
 
 
 ## Features
