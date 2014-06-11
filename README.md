@@ -231,7 +231,7 @@ $ocModal.open({
 
 ### Animations
 You can use a set of animations by including the file ocModal.animations.css and by adding one of those classes with the cls parameter :
-- fade
+- fade-in
 - slide-down
 - scale
 - fall
