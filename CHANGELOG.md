@@ -1,3 +1,19 @@
+<a name="0.1.3"></a>
+# 0.1.3 (2014-06-11)
+
+
+## Bug Fixes
+
+- anim name for fade is fade-in not fade
+ ([2dc9b931](https://github.com/ocombe/ocModal/commit/2dc9b93119356bad0f19b037e7ec9233fd505c5a))
+
+
+## Features
+
+- added scss files to dist for bower distribution
+ ([35b8181d](https://github.com/ocombe/ocModal/commit/35b8181d042e1562de9d6ca2568451c4191d83e0))
+
+
 <a name="0.1.2"></a>
 # 0.1.2 (2014-06-05)
 
