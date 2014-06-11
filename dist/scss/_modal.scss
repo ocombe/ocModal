@@ -1,0 +1,64 @@
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    // IE8 filter
+    $opacity-ie: ($opacity * 100);
+    filter: #{alpha(opacity=$opacity-ie)};
+}
+
+.noOverflow {
+    overflow: hidden;
+}
+
+.modal-wrapper {
+    z-index: $zindex-modal;
+    position: relative;
+
+    .modal-backdrop {
+        @include opacity($modal-backdrop-opacity);
+    }
+}
+
+.modal {
+    display: block;
+    overflow: auto;
+    text-align: center;
+
+    .modal-dialog {
+        z-index: $zindex-modal + 10;
+        width: auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        text-align: left; /* on rétablit l'alignement du texte */
+        @include perspective(1300px);
+
+        .modal-content {
+            border-radius: $modal-border-radius;
+            width: 600px;
+            padding: 10px 10px 0 10px;
+            max-width: 100%;
+            max-height: 100%;
+            margin: 0;
+        }
+    }
+    .modal-dialog {
+        @include transform(translate(-50%, -50%));
+    }
+}
+.no-csstransforms {
+    .modal-dialog {
+        position: relative;
+        left: auto;
+        top: auto;
+        margin: auto;
+    }
+}
+
+// IE7 support
+// Styles that make popup look nicier in old IE
+.lt-ie8 {
+    .modal-content {
+        display: inline;
+        zoom: 1;
+    }
+}

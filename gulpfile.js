@@ -1,12 +1,15 @@
 var gulp = require('gulp');
 
-gulp.task('sass', function () {
+gulp.task('sass', function() {
 	var sass = require('gulp-sass'),
 		minifyCSS = require('gulp-minify-css'),
 		rename = require('gulp-rename');
 
-		// light
-		gulp.src('./src/scss/ocModal.light.scss')
+	gulp.src('./src/scss/*.scss')
+		.pipe(gulp.dest('./dist/scss'));
+
+	// light
+	gulp.src('./src/scss/ocModal.light.scss')
 		.pipe(sass())
 		.pipe(gulp.dest('./dist/css'))
 		.pipe(gulp.dest('./example'))
@@ -14,16 +17,16 @@ gulp.task('sass', function () {
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('./dist/css'));
 
-		// full (bootstrap included)
-		gulp.src('./src/scss/ocModal.full.scss')
+	// full (bootstrap included)
+	gulp.src('./src/scss/ocModal.full.scss')
 		.pipe(sass())
 		.pipe(gulp.dest('./dist/css'))
 		.pipe(minifyCSS())
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('./dist/css'));
 
-		// full (bootstrap included)
-		gulp.src('./src/scss/ocModal.animations.scss')
+	// full (bootstrap included)
+	gulp.src('./src/scss/ocModal.animations.scss')
 		.pipe(sass())
 		.pipe(gulp.dest('./dist/css'))
 		.pipe(gulp.dest('./example'))
@@ -47,11 +50,11 @@ var build = function(newVer) {
 		          ''].join('\n');
 
 	return gulp.src('src/ocModal.js')
-		.pipe(header(banner, { pkg : pkg, version: newVer || pkg.version } ))
+		.pipe(header(banner, {pkg: pkg, version: newVer || pkg.version}))
 		.pipe(gulp.dest('dist'))
 		.pipe(gulp.dest('example'))
 		.pipe(uglify())
-		.pipe(header(banner, { pkg : pkg, version: newVer || pkg.version } ))
+		.pipe(header(banner, {pkg: pkg, version: newVer || pkg.version}))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('dist'));
 }
@@ -69,14 +72,15 @@ var promptBump = function(callback) {
 		.pipe(prompt.prompt({
 			type: 'list',
 			name: 'bump',
-			message: 'What type of version bump would you like to do ? (current version is '+pkg.version+')',
+			message: 'What type of version bump would you like to do ? (current version is ' + pkg.version + ')',
 			choices: [
-				'patch ('+pkg.version+' --> '+semver.inc(pkg.version, 'patch')+')',
-				'minor ('+pkg.version+' --> '+semver.inc(pkg.version, 'minor')+')',
-				'major ('+pkg.version+' --> '+semver.inc(pkg.version, 'major')+')',
+				'patch (' + pkg.version + ' --> ' + semver.inc(pkg.version, 'patch') + ')',
+				'minor (' + pkg.version + ' --> ' + semver.inc(pkg.version, 'minor') + ')',
+				'major (' + pkg.version + ' --> ' + semver.inc(pkg.version, 'major') + ')',
 				'none (exit)'
 			]
-		}, function(res){var newVer;
+		}, function(res) {
+			var newVer;
 			if(res.bump.match(/^patch/)) {
 				newVer = semver.inc(pkg.version, 'patch');
 			} else if(res.bump.match(/^minor/)) {
@@ -94,12 +98,12 @@ var promptBump = function(callback) {
 
 var makeChangelog = function(newVer) {
 	var streamqueue = require('streamqueue'),
-		stream = streamqueue({ objectMode: true }),
+		stream = streamqueue({objectMode: true}),
 		exec = require('gulp-exec'),
 		concat = require('gulp-concat'),
 		clean = require('gulp-clean');
 
-	stream.queue(gulp.src('').pipe(exec('node ./src/changelog.js ' + newVer, { pipeStdout: true })));
+	stream.queue(gulp.src('').pipe(exec('node ./src/changelog.js ' + newVer, {pipeStdout: true})));
 	stream.queue(gulp.src('CHANGELOG.md').pipe(clean()));
 
 	return stream.done()
@@ -120,7 +124,7 @@ gulp.task('release', ['sass'], function() {
 
 	return promptBump(function(newVer) {
 		var streamqueue = require('streamqueue');
-		var stream = streamqueue({ objectMode: true });
+		var stream = streamqueue({objectMode: true});
 
 		// make the changelog
 		stream.queue(makeChangelog(newVer));
