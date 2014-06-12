@@ -219,6 +219,7 @@
 						modal.$scope.modalShow = false;
 
 						$timeout(function() {
+							modal.$scope.$destroy();
 							modal.$element.remove(); // destroy the modal
 
 							modal.callbacksList = []; // forget all callbacks
