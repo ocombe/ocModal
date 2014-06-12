@@ -232,8 +232,6 @@
 
 							deferred.resolve();
 						}, animDuration);
-
-
 					});
 				} else {
 					deferred.resolve();

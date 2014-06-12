@@ -1,6 +1,6 @@
 /**
  * ocModal - An angularJS modal directive / service
- * @version v0.1.3
+ * @version v0.1.4
  * @link https://github.com/ocombe/ocModal
  * @license MIT
  * @author Olivier Combe <olivier.combe@gmail.com>
@@ -239,8 +239,6 @@
 
 							deferred.resolve();
 						}, animDuration);
-
-
 					});
 				} else {
 					deferred.resolve();

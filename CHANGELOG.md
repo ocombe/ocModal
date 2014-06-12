@@ -1,3 +1,13 @@
+<a name="0.1.4"></a>
+# 0.1.4 (2014-06-12)
+
+
+## Bug Fixes
+
+- destroy the scope of the modal before removing it
+ ([12d34a76](https://github.com/ocombe/ocModal/commit/12d34a76134531a6ec5bbf4b8e04392edb6cf84b))
+
+
 <a name="0.1.3"></a>
 # 0.1.3 (2014-06-11)
 
