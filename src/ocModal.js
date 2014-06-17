@@ -17,9 +17,8 @@
 		$modalWrapper.css('display', 'none');
 		$modalWrapper.append($dialogsWrapper);
 		$body.append($modalWrapper);
-		var $backdrop = $dialogsWrapper.children()[0];
-		$dialogsWrapper.on('click.modal', function(e) {
-			if(e.target === $backdrop) { // only if clicked on backdrop
+		$dialogsWrapper.on('click', function(e) {
+			if(angular.element(e.target).hasClass('modal-backdrop')) { // only if clicked on backdrop
 				$rootScope.$apply(function() {
 					self.closeOnEsc();
 				});
@@ -145,6 +144,7 @@
 							var $e = modals[openedModals[i]].$element;
 							modals[openedModals[i]].baseZIndex = $e.css('z-index');
 							$e.css('z-index', '-1');
+							$e.addClass('no-backdrop');
 						}
 					}
 				}
@@ -225,6 +225,7 @@
 							} else {
 								var topModal = modals[openedModals[openedModals.length - 1]];
 								topModal.$element.css('z-index', topModal.baseZIndex);
+								topModal.$element.removeClass('no-backdrop');
 							}
 							if(typeof modal.params.onClose === 'function') {
 								modal.params.onClose.apply(undefined, args);
@@ -250,6 +251,7 @@
 			scope: true,
 			template:
 			'<div class="modal-dialog">' +
+				'<div class="modal-backdrop"></div>' +
 				'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-if="modalTemplate"></div>' +
 				'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-include="modalUrl"></div>' +
 			'</div>',
@@ -277,7 +279,7 @@
 				$scope.$watch('modalTemplate', function(newVal, oldVal) {
 					if(typeof newVal !== 'undefined') {
 						if(!$templateWrapper) {
-							$templateWrapper = angular.element($element.children()[0]);
+							$templateWrapper = angular.element($element.children()[1]);
 						}
 						$templateWrapper.append($compile(newVal)($scope));
 						$scope.$emit('$includeContentLoaded');
@@ -333,4 +335,12 @@
 			}
 		};
 	}]);
+
+
+
 })();
+
+/* Modernizr 2.8.2 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-flexbox-flexboxlegacy-cssclasses-testprop-testallprops-domprefixes
+ */
+(function(e,t,n){function x(e){f.cssText=e}function T(e,t){return x(prefixes.join(e+";")+(t||""))}function N(e,t){return typeof e===t}function C(e,t){return!!~(""+e).indexOf(t)}function k(e,t){for(var r in e){var i=e[r];if(!C(i,"-")&&f[i]!==n){return t=="pfx"?i:true}}return false}function L(e,t,r){for(var i in e){var s=t[e[i]];if(s!==n){if(r===false)return e[i];if(N(s,"function")){return s.bind(r||t)}return s}}return false}function A(e,t,n){var r=e.charAt(0).toUpperCase()+e.slice(1),i=(e+" "+p.join(r+" ")+r).split(" ");if(N(t,"string")||N(t,"undefined")){return k(i,t)}else{i=(e+" "+d.join(r+" ")+r).split(" ");return L(i,t,n)}}var r="2.8.2",i={},s=true,o=t.documentElement,u="modernizr",a=t.createElement(u),f=a.style,l,c={}.toString,h="Webkit Moz O ms",p=h.split(" "),d=h.toLowerCase().split(" "),v={},m={},g={},y=[],b=y.slice,w,E={}.hasOwnProperty,S;if(!N(E,"undefined")&&!N(E.call,"undefined")){S=function(e,t){return E.call(e,t)}}else{S=function(e,t){return t in e&&N(e.constructor.prototype[t],"undefined")}}if(!Function.prototype.bind){Function.prototype.bind=function(t){var n=this;if(typeof n!="function"){throw new TypeError}var r=b.call(arguments,1),i=function(){if(this instanceof i){var e=function(){};e.prototype=n.prototype;var s=new e;var o=n.apply(s,r.concat(b.call(arguments)));if(Object(o)===o){return o}return s}else{return n.apply(t,r.concat(b.call(arguments)))}};return i}}v["flexbox"]=function(){return A("flexWrap")};v["csstransforms"]=function(){return!!A("transform")};for(var O in v){if(S(v,O)){w=O.toLowerCase();i[w]=v[O]();y.push((i[w]?"":"no-")+w)}}i.addTest=function(e,t){if(typeof e=="object"){for(var r in e){if(S(e,r)){i.addTest(r,e[r])}}}else{e=e.toLowerCase();if(i[e]!==n){return i}t=typeof t=="function"?t():t;if(typeof s!=="undefined"&&s){o.className+=" "+(t?"":"no-")+e}i[e]=t}return i};x("");a=l=null;(function(e,t){function c(e,t){var n=e.createElement("p"),r=e.getElementsByTagName("head")[0]||e.documentElement;n.innerHTML="x<style>"+t+"</style>";return r.insertBefore(n.lastChild,r.firstChild)}function h(){var e=y.elements;return typeof e=="string"?e.split(" "):e}function p(e){var t=f[e[u]];if(!t){t={};a++;e[u]=a;f[a]=t}return t}function d(e,n,r){if(!n){n=t}if(l){return n.createElement(e)}if(!r){r=p(n)}var o;if(r.cache[e]){o=r.cache[e].cloneNode()}else if(s.test(e)){o=(r.cache[e]=r.createElem(e)).cloneNode()}else{o=r.createElem(e)}return o.canHaveChildren&&!i.test(e)&&!o.tagUrn?r.frag.appendChild(o):o}function v(e,n){if(!e){e=t}if(l){return e.createDocumentFragment()}n=n||p(e);var r=n.frag.cloneNode(),i=0,s=h(),o=s.length;for(;i<o;i++){r.createElement(s[i])}return r}function m(e,t){if(!t.cache){t.cache={};t.createElem=e.createElement;t.createFrag=e.createDocumentFragment;t.frag=t.createFrag()}e.createElement=function(n){if(!y.shivMethods){return t.createElem(n)}return d(n,e,t)};e.createDocumentFragment=Function("h,f","return function(){"+"var n=f.cloneNode(),c=n.createElement;"+"h.shivMethods&&("+h().join().replace(/[\w\-]+/g,function(e){t.createElem(e);t.frag.createElement(e);return'c("'+e+'")'})+");return n}")(y,t.frag)}function g(e){if(!e){e=t}var n=p(e);if(y.shivCSS&&!o&&!n.hasCSS){n.hasCSS=!!c(e,"article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}"+"mark{background:#FF0;color:#000}"+"template{display:none}")}if(!l){m(e,n)}return e}var n="3.7.0";var r=e.html5||{};var i=/^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i;var s=/^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i;var o;var u="_html5shiv";var a=0;var f={};var l;(function(){try{var e=t.createElement("a");e.innerHTML="<xyz></xyz>";o="hidden"in e;l=e.childNodes.length==1||function(){t.createElement("a");var e=t.createDocumentFragment();return typeof e.cloneNode=="undefined"||typeof e.createDocumentFragment=="undefined"||typeof e.createElement=="undefined"}()}catch(n){o=true;l=true}})();var y={elements:r.elements||"abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video",version:n,shivCSS:r.shivCSS!==false,supportsUnknownElements:l,shivMethods:r.shivMethods!==false,type:"default",shivDocument:g,createElement:d,createDocumentFragment:v};e.html5=y;g(t)})(this,t);i._version=r;i._domPrefixes=d;i._cssomPrefixes=p;i.testProp=function(e){return k([e])};i.testAllProps=A;o.className=o.className.replace(/(^|\s)no-js(\s|$)/,"$1$2")+(s?" js "+y.join(" "):"");return i})(this,this.document)

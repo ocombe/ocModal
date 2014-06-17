@@ -26,35 +26,63 @@
     .modal-dialog {
         z-index: $zindex-modal + 10;
         width: auto;
-        position: absolute;
-        left: 50%;
-        top: 50%;
         text-align: left; /* on rétablit l'alignement du texte */
         @include perspective(1300px);
         max-width: 100%;
-        max-height: 100%;
-        margin: 0;
-        padding: 10px;
+
+        &.no-backdrop .modal-backdrop {
+            display: none;
+        }
 
         .modal-content {
+            z-index: $zindex-modal;
             border-radius: $modal-border-radius;
             width: 600px;
             padding: 10px 10px 0 10px;
             max-width: 100%;
-            max-height: 100%;
             margin: 0;
         }
     }
-    .modal-dialog {
-        @include transform(translate(-50%, -50%));
+}
+
+.flexbox {
+    .modal {
+        & > .modal-backdrop {
+            display: none;
+        }
+        .modal-dialog {
+            @include display(flex);
+            @include align-items(center);
+            @include justify-content(center);
+            position: absolute;
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+            padding: 10px;
+        }
     }
 }
-.no-csstransforms {
+
+.no-flexbox {
     .modal-dialog {
-        position: relative;
-        left: auto;
-        top: auto;
-        margin: auto;
+        @include transform(translate(-50%, -50%));
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: 0;
+        padding: 10px;
+        max-height: 100%;
+
+        .modal-backdrop {
+            display: none;
+        }
+    }
+    &.no-csstransforms {
+        .modal-dialog {
+            left: auto;
+            top: auto;
+            margin: auto;
+        }
     }
 }
 
