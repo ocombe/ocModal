@@ -1,3 +1,15 @@
+<a name="0.1.5"></a>
+# 0.1.5 (2014-06-17)
+
+
+## Bug Fixes
+
+- the slit animation now ends with a nice fade
+ ([5d27b162](https://github.com/ocombe/ocModal/commit/5d27b1623cc770d6dc6b18ba0f7e66c41d646989))
+- no more blurry modal on chrome
+ ([153d4db3](https://github.com/ocombe/ocModal/commit/153d4db3a35c03ed2237a6d832f251903b6954a5))
+
+
 <a name="0.1.4"></a>
 # 0.1.4 (2014-06-12)
 
