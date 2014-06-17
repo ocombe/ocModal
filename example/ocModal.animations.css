@@ -128,13 +128,17 @@
   -ms-transform-style: preserve-3d;
   -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  -webkit-transform: translateZ(-3000px) rotateY(90deg);
-  -moz-transform: translateZ(-3000px) rotateY(90deg);
-  -ms-transform: translateZ(-3000px) rotateY(90deg);
-  -o-transform: translateZ(-3000px) rotateY(90deg);
-  transform: translateZ(-3000px) rotateY(90deg);
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  transition: opacity 0.5s;
   opacity: 0; }
   .modal .modal-dialog .modal-content.slit.opened {
+    opacity: 1;
+    -webkit-transform: translateZ(-3000px) rotateY(90deg);
+    -moz-transform: translateZ(-3000px) rotateY(90deg);
+    -ms-transform: translateZ(-3000px) rotateY(90deg);
+    -o-transform: translateZ(-3000px) rotateY(90deg);
+    transform: translateZ(-3000px) rotateY(90deg);
     -webkit-animation: slit 0.7s forwards ease-out;
     -moz-animation: slit 0.7s forwards ease-out;
     animation: slit 0.7s forwards ease-out; }
@@ -142,12 +146,10 @@
 @-webkit-keyframes slit {
   50% {
     -webkit-transform: translateZ(-250px) rotateY(89deg);
-    opacity: 0.5;
     -webkit-animation-timing-function: ease-out; }
 
   100% {
-    -webkit-transform: translateZ(0) rotateY(0deg);
-    opacity: 1; } }
+    -webkit-transform: translateZ(0) rotateY(0deg); } }
 
 @-moz-keyframes slit {
   50% {
@@ -156,15 +158,12 @@
     -moz-animation-timing-function: ease-out; }
 
   100% {
-    -moz-transform: translateZ(0) rotateY(0deg);
-    opacity: 1; } }
+    -moz-transform: translateZ(0) rotateY(0deg); } }
 
 @keyframes slit {
   50% {
     transform: translateZ(-250px) rotateY(89deg);
-    opacity: 1;
     animation-timing-function: ease-in; }
 
   100% {
-    transform: translateZ(0) rotateY(0deg);
-    opacity: 1; } }
+    transform: translateZ(0) rotateY(0deg); } }
