@@ -6,6 +6,8 @@
 
 - bug fixed with backdrop overlay on IE
  ([e791f698](https://github.com/ocombe/ocModal/commit/e791f698781ed6b58d7a2053a8254dceaccd4714))
+- max-height on flexbox browsers
+ ([15a531d26f](https://github.com/ocombe/ocModal/commit/15a531d26ffcac51b5367e3a8e920b03791b9ec7))
 
 
 <a name="0.1.5"></a>
