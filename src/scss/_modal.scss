@@ -11,7 +11,7 @@
 
 .modal-wrapper {
     z-index: $zindex-modal;
-    position: relative;
+    position: fixed;
 
     .modal-backdrop {
         @include opacity($modal-backdrop-opacity);

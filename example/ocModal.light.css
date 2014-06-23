@@ -3,7 +3,7 @@
 
 .modal-wrapper {
   z-index: 1050;
-  position: relative; }
+  position: fixed; }
   .modal-wrapper .modal-backdrop {
     opacity: 0.8;
     filter: alpha(opacity=80); }
