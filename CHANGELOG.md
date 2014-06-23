@@ -1,3 +1,13 @@
+<a name="0.1.6"></a>
+# 0.1.6 (2014-06-23)
+
+
+## Bug Fixes
+
+- bug fixed with backdrop overlay on IE
+ ([e791f698](https://github.com/ocombe/ocModal/commit/e791f698781ed6b58d7a2053a8254dceaccd4714))
+
+
 <a name="0.1.5"></a>
 # 0.1.5 (2014-06-17)
 
