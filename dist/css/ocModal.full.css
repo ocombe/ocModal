@@ -173,7 +173,8 @@
   width: 100%;
   min-height: 100%;
   margin: 0;
-  padding: 10px; }
+  padding: 10px;
+  max-height: initial; }
 
 .no-flexbox .modal-dialog {
   -webkit-transform: translate(-50%, -50%);
