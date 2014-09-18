@@ -1,3 +1,13 @@
+<a name="0.1.7"></a>
+# 0.1.7 (2014-09-18)
+
+
+## Bug Fixes
+
+- compatibility with angular 1.3.0
+ ([ff5c4500](https://github.com/ocombe/ocModal/commit/ff5c45009ad0b5b67b3daf826c128831c54f39fe))
+
+
 <a name="0.1.6"></a>
 # 0.1.6 (2014-06-23)
 
