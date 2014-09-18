@@ -166,7 +166,7 @@
 
 				var off = modal.$scope.$on('$includeContentLoaded', function(event) { // on view load
 					if(modal.params.init && !modal.params.isolate) {
-						angular.extend(event.targetScope, modal.params.init, true);
+						angular.extend(event.targetScope, modal.params.init);
 					}
 					if(typeof modal.params.controller === 'string') {
 						$controller(modal.params.controller, {$scope: event.targetScope, $init: modal.params.init, $ocModalParams: modal.params}); // inject controller
