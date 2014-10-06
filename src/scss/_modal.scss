@@ -38,7 +38,7 @@
             z-index: $zindex-modal;
             border-radius: $modal-border-radius;
             width: 600px;
-            padding: 10px 10px 0 10px;
+            padding: 10px;
             max-width: 100%;
             margin: 0;
         }
@@ -57,6 +57,7 @@
             position: absolute;
             width: 100%;
             min-height: 100%;
+            //height: 100%;
             margin: 0;
             padding: 10px;
 			max-height: initial;
