@@ -1,3 +1,15 @@
+<a name="0.1.8"></a>
+# 0.1.8 (2014-10-06)
+
+
+## Bug Fixes
+
+- height 100% for vertical align center on ie10+
+ ([a39b9b40](https://github.com/ocombe/ocModal/commit/a39b9b40cf61e4a852e1987a731953044563cd99))
+- padding for bootstrap modals
+ ([4fcb0653](https://github.com/ocombe/ocModal/commit/4fcb0653dba0a4113d719bc4c9daef4d13758409))
+
+
 <a name="0.1.7"></a>
 # 0.1.7 (2014-09-18)
 
