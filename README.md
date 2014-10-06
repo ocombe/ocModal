@@ -12,6 +12,7 @@ An angularJS modal directive &amp; service
 ### [Demo on Plunker](http://embed.plnkr.co/8QBKgw779g6jT6lmhXS5/)
 
 ### Usage
+- Download the lib (you can use `bower install ocModal`)
 - Put ocModal.js into you project
 - Add the css file to your project: if you don't have bootstrap 3, include dist/css/ocModal.full.min.css. If you already have bootstrap 3, use dist/css/ocModal.light.min.css
 - Add the module ```oc.modal``` to your application
