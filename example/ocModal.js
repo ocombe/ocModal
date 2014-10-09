@@ -1,6 +1,6 @@
 /**
  * ocModal - An angularJS modal directive / service
- * @version v0.1.8
+ * @version v0.1.9
  * @link https://github.com/ocombe/ocModal
  * @license MIT
  * @author Olivier Combe <olivier.combe@gmail.com>

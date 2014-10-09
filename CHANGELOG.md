@@ -1,3 +1,13 @@
+<a name="0.1.9"></a>
+# 0.1.9 (2014-10-09)
+
+
+## Bug Fixes
+
+- revert "height 100% for vertical align center on ie10+"
+ ([b8d1dcc4](https://github.com/ocombe/ocModal/commit/b8d1dcc4a22c7516740080b49838c6317806e71e))
+
+
 <a name="0.1.8"></a>
 # 0.1.8 (2014-10-06)
 
