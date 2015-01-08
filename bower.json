@@ -1,7 +1,7 @@
 {
   "name": "ocModal",
   "main": "dist/ocModal.min.js",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "homepage": "https://github.com/ocombe/ocModal",
   "authors": ["Olivier Combe <olivier.combe@gmail.com>"],
   "description": "An angularJS modal directive / service",

@@ -1,3 +1,13 @@
+<a name="0.1.10"></a>
+# 0.1.10 (2015-01-08)
+
+
+## Bug Fixes
+
+- support for the latest versions of bootstrap
+ ([8e56e21e](https://github.com/ocombe/ocModal/commit/8e56e21e29a9b2dcb58109eff3eb30fc23691866))
+
+
 <a name="0.1.9"></a>
 # 0.1.9 (2014-10-09)
 
