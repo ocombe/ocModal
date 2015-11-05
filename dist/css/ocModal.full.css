@@ -1,4 +1,7 @@
-*, *:before, *:after {
+@charset "UTF-8";
+*,
+*:before,
+*:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
@@ -145,6 +148,7 @@
 
 .flexbox .modal > .modal-backdrop {
   display: none; }
+
 .flexbox .modal .modal-dialog {
   display: -webkit-box;
   display: -moz-box;
@@ -192,6 +196,7 @@
   max-height: 100%; }
   .no-flexbox .modal-dialog .modal-backdrop {
     display: none; }
+
 .no-flexbox.no-csstransforms .modal-dialog {
   left: auto;
   top: auto;

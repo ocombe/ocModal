@@ -10,7 +10,11 @@ gulp.task('sass', function() {
 
 	// light
 	gulp.src('./src/scss/ocModal.light.scss')
-		.pipe(sass())
+		.pipe(sass({
+			includePaths: [
+				'node_modules/bourbon/app/assets/stylesheets/'
+			]
+		}))
 		.pipe(gulp.dest('./dist/css'))
 		.pipe(gulp.dest('./example'))
 		.pipe(minifyCSS())
@@ -57,7 +61,7 @@ var build = function(newVer) {
 		.pipe(header(banner, {pkg: pkg, version: newVer || pkg.version}))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('dist'));
-}
+};
 
 gulp.task('build', ['sass'], function() {
 	return build();
@@ -94,7 +98,7 @@ var promptBump = function(callback) {
 				return;
 			}
 		}));
-}
+};
 
 var makeChangelog = function(newVer) {
 	var streamqueue = require('streamqueue'),
@@ -109,7 +113,7 @@ var makeChangelog = function(newVer) {
 	return stream.done()
 		.pipe(concat('CHANGELOG.md'))
 		.pipe(gulp.dest('./'));
-}
+};
 
 // Make changelog
 gulp.task('changelog', function(event) {
@@ -117,7 +121,7 @@ gulp.task('changelog', function(event) {
 	var semver = require('semver');
 
 	return promptBump(makeChangelog);
-})
+});
 
 gulp.task('release', ['sass'], function() {
 	var jeditor = require("gulp-json-editor");
@@ -150,4 +154,4 @@ gulp.task('release', ['sass'], function() {
 
 		return stream.done();
 	});
-})
+});

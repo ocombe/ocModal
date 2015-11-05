@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .noOverflow {
   overflow: hidden; }
 
@@ -35,6 +36,7 @@
 
 .flexbox .modal > .modal-backdrop {
   display: none; }
+
 .flexbox .modal .modal-dialog {
   display: -webkit-box;
   display: -moz-box;
@@ -82,6 +84,7 @@
   max-height: 100%; }
   .no-flexbox .modal-dialog .modal-backdrop {
     display: none; }
+
 .no-flexbox.no-csstransforms .modal-dialog {
   left: auto;
   top: auto;

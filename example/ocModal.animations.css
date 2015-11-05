@@ -5,10 +5,11 @@
   opacity: 0; }
   .modal .modal-dialog .modal-content.fade-in.opened {
     opacity: 1; }
+
 .modal .modal-dialog .modal-content.slide-down {
-  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
-  -moz-transition: opacity 0.5s, -moz-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
+  -webkit-transition: opacity, -webkit-transform;
+  -moz-transition: opacity, -moz-transform;
+  transition: opacity, transform;
   -webkit-transform: translateY(-20%);
   -moz-transform: translateY(-20%);
   -ms-transform: translateY(-20%);
@@ -22,15 +23,16 @@
     -o-transform: translateY(0%);
     transform: translateY(0%);
     opacity: 1; }
+
 .modal .modal-dialog .modal-content.scale {
   -webkit-transform: scale(0.7);
   -moz-transform: scale(0.7);
   -ms-transform: scale(0.7);
   -o-transform: scale(0.7);
   transform: scale(0.7);
-  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
-  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
-  transition: transform 0.5s, opacity 0.5s;
+  -webkit-transition: -webkit-transform, opacity;
+  -moz-transition: -moz-transform, opacity;
+  transition: transform, opacity;
   opacity: 0; }
   .modal .modal-dialog .modal-content.scale.opened {
     -webkit-transform: scale(1);
@@ -39,6 +41,7 @@
     -o-transform: scale(1);
     transform: scale(1);
     opacity: 1; }
+
 .modal .modal-dialog .modal-content.fall {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
@@ -50,9 +53,9 @@
   -ms-transform: translateZ(600px) rotateX(20deg);
   -o-transform: translateZ(600px) rotateX(20deg);
   transform: translateZ(600px) rotateX(20deg);
-  -webkit-transition: -webkit-transform 0.3s ease-in, opacity 0.3s ease-in;
-  -moz-transition: -moz-transform 0.3s ease-in, opacity 0.3s ease-in;
-  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+  -webkit-transition: -webkit-transform, opacity;
+  -moz-transition: -moz-transform, opacity;
+  transition: transform, opacity;
   opacity: 0; }
   .modal .modal-dialog .modal-content.fall.opened {
     -webkit-transform: translateZ(0) rotateX(0deg);
@@ -61,6 +64,7 @@
     -o-transform: translateZ(0) rotateX(0deg);
     transform: translateZ(0) rotateX(0deg);
     opacity: 1; }
+
 .modal .modal-dialog .modal-content.flip-horizontal {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
@@ -72,9 +76,9 @@
   -ms-transform: rotateY(-70deg);
   -o-transform: rotateY(-70deg);
   transform: rotateY(-70deg);
-  -webkit-transition: -webkit-transform 0.3s ease-in, opacity 0.3s ease-in;
-  -moz-transition: -moz-transform 0.3s ease-in, opacity 0.3s ease-in;
-  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+  -webkit-transition: -webkit-transform, opacity;
+  -moz-transition: -moz-transform, opacity;
+  transition: transform, opacity;
   opacity: 0; }
   .modal .modal-dialog .modal-content.flip-horizontal.opened {
     -webkit-transform: rotateY(0deg);
@@ -83,6 +87,7 @@
     -o-transform: rotateY(0deg);
     transform: rotateY(0deg);
     opacity: 1; }
+
 .modal .modal-dialog .modal-content.flip-vertical {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
@@ -94,9 +99,9 @@
   -ms-transform: rotateX(-70deg);
   -o-transform: rotateX(-70deg);
   transform: rotateX(-70deg);
-  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
-  -moz-transition: -moz-transform 0.3s, opacity 0.3s;
-  transition: transform 0.3s, opacity 0.3s;
+  -webkit-transition: -webkit-transform, opacity;
+  -moz-transition: -moz-transform, opacity;
+  transition: transform, opacity;
   opacity: 0; }
   .modal .modal-dialog .modal-content.flip-vertical.opened {
     -webkit-transform: rotateX(0deg);
@@ -105,15 +110,16 @@
     -o-transform: rotateX(0deg);
     transform: rotateX(0deg);
     opacity: 1; }
+
 .modal .modal-dialog .modal-content.super-scaled {
   -webkit-transform: scale(2);
   -moz-transform: scale(2);
   -ms-transform: scale(2);
   -o-transform: scale(2);
   transform: scale(2);
-  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
-  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
-  transition: transform 0.5s, opacity 0.5s;
+  -webkit-transition: -webkit-transform, opacity;
+  -moz-transition: -moz-transform, opacity;
+  transition: transform, opacity;
   opacity: 0; }
   .modal .modal-dialog .modal-content.super-scaled.opened {
     -webkit-transform: scale(1);
@@ -122,6 +128,7 @@
     -o-transform: scale(1);
     transform: scale(1);
     opacity: 1; }
+
 .modal .modal-dialog .modal-content.slit {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
@@ -147,16 +154,14 @@
   50% {
     -webkit-transform: translateZ(-250px) rotateY(89deg);
     -webkit-animation-timing-function: ease-out; }
-
   100% {
     -webkit-transform: translateZ(0) rotateY(0deg); } }
 
 @-moz-keyframes slit {
   50% {
     -moz-transform: translateZ(-250px) rotateY(89deg);
-    opacity: 0.5;
+    opacity: .5;
     -moz-animation-timing-function: ease-out; }
-
   100% {
     -moz-transform: translateZ(0) rotateY(0deg); } }
 
@@ -164,6 +169,5 @@
   50% {
     transform: translateZ(-250px) rotateY(89deg);
     animation-timing-function: ease-in; }
-
   100% {
     transform: translateZ(0) rotateY(0deg); } }
