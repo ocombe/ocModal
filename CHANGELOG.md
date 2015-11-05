@@ -1,3 +1,13 @@
+<a name="0.1.11"></a>
+# 0.1.11 (2015-11-05)
+
+
+## Bug Fixes
+
+- don't prevent click events propagation
+ ([727c6d25](https://github.com/ocombe/ocModal/commit/727c6d25811f4c2e8607b3909259abc2af585e8d))
+
+
 <a name="0.1.10"></a>
 # 0.1.10 (2015-01-08)
 

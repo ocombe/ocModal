@@ -1,11 +1,26 @@
 {
   "name": "ocModal",
   "main": "dist/ocModal.min.js",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "homepage": "https://github.com/ocombe/ocModal",
-  "authors": ["Olivier Combe <olivier.combe@gmail.com>"],
+  "authors": [
+    "Olivier Combe <olivier.combe@gmail.com>"
+  ],
   "description": "An angularJS modal directive / service",
-  "keywords": ["modal", "dialog", "module", "angular", "angularJS"],
+  "keywords": [
+    "modal",
+    "dialog",
+    "module",
+    "angular",
+    "angularJS"
+  ],
   "license": "MIT",
-  "ignore": ["**/.*", "node_modules", "bower_components", "src", "gulpfile.js", "package.json"]
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "gulpfile.js",
+    "package.json"
+  ]
 }
