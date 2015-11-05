@@ -23,7 +23,6 @@
 					self.closeOnEsc();
 				});
 			}
-			e.stopPropagation();
 		});
 
 		var parseMaxTime = function parseMaxTime(str) {
@@ -32,7 +31,7 @@
 				total = Math.max(parseFloat(value) || 0, total);
 			});
 			return total;
-		}
+		};
 
 		var getAnimDuration = function getDuration($element) {
 			var duration = 0;
@@ -78,7 +77,7 @@
 			}
 
 			return duration * 1000;
-		}
+		};
 
 		angular.element(document).on('keyup', function(e) {
 			if (e.keyCode == 27 && openedModals.length > 0) {
@@ -130,7 +129,7 @@
 					self.waitingForOpen = true;
 					self.close(opt.id).then(function() {
 						self.open(opt);
-					})
+					});
 					return;
 				}
 				// ok let's open the modal
