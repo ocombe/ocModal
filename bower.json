@@ -1,7 +1,7 @@
 {
   "name": "ocModal",
   "main": "dist/ocModal.min.js",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "homepage": "https://github.com/ocombe/ocModal",
   "authors": [
     "Olivier Combe <olivier.combe@gmail.com>"

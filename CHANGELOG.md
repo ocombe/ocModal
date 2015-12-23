@@ -1,3 +1,15 @@
+<a name="0.1.12"></a>
+# 0.1.12 (2015-12-23)
+
+
+## Bug Fixes
+
+- make it work for npm
+ ([70d39ecf](https://github.com/ocombe/ocModal/commit/70d39ecfb4b825a1d139aa84ebed352456606a76))
+- vertical center with flexbox in IE10+
+ ([b0aa3f95](https://github.com/ocombe/ocModal/commit/b0aa3f9529ae9952498907cb15a1cb265e72083e))
+
+
 <a name="0.1.11"></a>
 # 0.1.11 (2015-11-05)
 
