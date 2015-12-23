@@ -1,5 +1,5 @@
 {
-  "name": "ocModal",
+  "name": "ocmodal",
   "version": "0.1.11",
   "description": "An angularJS modal directive / service",
   "author": "Olivier Combe <olivier.combe@gmail.com>",
@@ -11,7 +11,6 @@
   },
   "scripts": {
     "start": "static ./example/ -p 3000",
-    "install": "bower install",
     "build": "gulp build"
   },
   "repository": {
