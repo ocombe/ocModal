@@ -151,6 +151,7 @@
 				openedModals.push(opt.id || '_default');
 				modal.params = opt;
 				modal.$scope.customClass = modal.params.cls;
+				modal.$scope.backdropCls = modal.params.backdropCls;
 
 				// timeout for animations (if any)
 				$rootScope.$digest();
@@ -250,7 +251,7 @@
 			scope: true,
 			template:
 			'<div class="modal-dialog">' +
-				'<div class="modal-backdrop"></div>' +
+				'<div class="modal-backdrop {{backdropCls}}"></div>' +
 				'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-if="modalTemplate"></div>' +
 				'<div class="modal-content {{customClass}}" ng-class="{opened: modalShow}" ng-include="modalUrl"></div>' +
 			'</div>',
